@@ -2,12 +2,13 @@
 # Distributed under the terms of the Modified BSD License.
 FROM jupyter/scipy-notebook
 
-MAINTAINER Jupyter Project <jupyter@googlegroups.com>
+MAINTAINER Carolyn Ownby <carolyn@archethought.com>
 
 USER root
 
 # Spark dependencies
 ENV APACHE_SPARK_VERSION 2.0.0
+
 RUN apt-get -y update && \
     apt-get install -y --no-install-recommends openjdk-7-jre-headless && \
     apt-get clean && \
@@ -39,4 +40,28 @@ ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.9-src.zip
 ENV MESOS_NATIVE_LIBRARY /usr/local/lib/libmesos.so
 ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info
 
+
+# RSpark config
+ENV R_LIBS_USER $SPARK_HOME/R/lib
+
+# R pre-requisites
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    fonts-dejavu \
+    gfortran \
+    gcc && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 USER $NB_USER
+
+# R packages
+RUN conda config --add channels r && \
+    conda install --quiet --yes \
+    'r-base=3.3*' \
+    'r-irkernel=0.6*' \
+    'r-ggplot2=2.1*' \
+    'r-rcurl=1.95*' && conda clean -tipsy
+
+# Apache Toree kernel
+RUN pip --no-cache-dir install toree==0.1.0.dev7
+RUN jupyter toree install --user
