@@ -15,7 +15,7 @@ RUN apt-get -y update && \
     rm -rf /var/lib/apt/lists/*
 RUN cd /tmp && \
         wget -q http://d3kbcqa49mib13.cloudfront.net/spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz && \
-        echo "8A14410A906926D2593E45E1FFD7E26C4E9223DF94AD9902FC62CAD6B900A8FCC22944FB6E9DFC2C4B35066A7D0C1E676CE4D0DB35DEE36DAC2DEEA6B83C1F24 *spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz" | sha256sum -c - && \
+        echo "8A14410A906926D2593E45E1FFD7E26C4E9223DF94AD9902FC62CAD6B900A8FCC22944FB6E9DFC2C4B35066A7D0C1E676CE4D0DB35DEE36DAC2DEEA6B83C1F24 *spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz" | shasum -c - && \
         tar xzf spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz -C /usr/local && \
         rm spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz
 RUN cd /usr/local && ln -s spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7 spark
