@@ -9,3 +9,13 @@ and [all-spark-notebook](https://github.com/jupyter/docker-stacks/tree/master/al
  ```
  $ docker build -t "all-spark-2:dockerfile" <path to dockerfile>
  ```
+## Notes
+
+### Container modifications
+
+These are additions I've made to my container which may or may not be propagated to the image definition/Dockerfile, but am recording for tracking purposes.
+Added to /usr/local/spark/conf:
+
+ * core-site.xml
+ * hdfs-site.xml
+ * spark-env.xml, added HADOOP_CONF_DIR=$SPARK_HOME/conf
