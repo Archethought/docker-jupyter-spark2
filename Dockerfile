@@ -62,6 +62,9 @@ RUN conda config --add channels r && \
     'r-ggplot2=2.1*' \
     'r-rcurl=1.95*' && conda clean -tipsy
 
+# Pika 
+RUN pip2 install pika
+
 # Apache Toree kernel
 RUN pip --no-cache-dir install toree==0.1.0.dev7
 RUN jupyter toree install --user
