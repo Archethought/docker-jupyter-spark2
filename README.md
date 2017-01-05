@@ -3,7 +3,7 @@ Work sponsored by [Archethought](https://archethought.github.io/)
 
 I could not find a dockerized jupyter notebook with Spark 2, 
 so I merged Docker Stacks [pyspark-notebook](https://github.com/jupyter/docker-stacks/tree/master/pyspark-notebook) 
-and [all-spark-notebook](https://github.com/jupyter/docker-stacks/tree/master/all-spark-notebook) with an update to Spark 2.0.0
+and [all-spark-notebook](https://github.com/jupyter/docker-stacks/tree/master/all-spark-notebook) with an update to Spark 2.0.2
  
 
 Build suggestion:  
