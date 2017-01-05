@@ -2,3 +2,5 @@
 .git
 .cache
 build*
+*.ipynb
+
