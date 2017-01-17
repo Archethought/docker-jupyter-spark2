@@ -8,7 +8,7 @@ and [all-spark-notebook](https://github.com/jupyter/docker-stacks/tree/master/al
 
 Build suggestion:  
 ```
-date; docker build -t spark2-image . 1>build.log 2>build.err ;date ;ll 
+time docker build -t spark2-image . 1>build.log 2>build.err ;ll 
 
 ```
 Build.err will be empty if the image built successfully.
