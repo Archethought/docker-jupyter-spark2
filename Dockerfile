@@ -6,12 +6,11 @@ MAINTAINER Carolyn Ownby <carolyn@archethought.com>
 
 USER root
 
-
 # Spark and Mesos config
 ENV SPARK_HOME /usr/local/spark
 ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:/usr/lib/python2.7/dist-packages
 ENV MESOS_NATIVE_LIBRARY /usr/local/lib/libmesos.so
-ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info --spark-jars=/usr/share/java/mysql-connector-java.jar
+ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info
 
 # Spark dependencies
 ENV APACHE_SPARK_VERSION 2.0.2
@@ -65,15 +64,15 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 ##### >>>>
-# MYSQL
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils && \
-    apt-get install -y mysql-client		&& \
-    apt-get install -y python-dev 		&& \
-    apt-get install -y libmysqlclient-dev	&& \
-    apt-get install -y libmysql-java		&& \
+# MYSQL for spark
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends apt-utils && \
+    apt-get install -y libmysql-java && \
     apt-get clean
+RUN ln -s /usr/share/java/mysql-connector-java.jar /usr/local/spark/jars
 
-RUN pip2 install MySQL-python
+# for python
+#RUN apt-get update && apt-get install -y python-mysqldb
 
 ##### <<<<
 
